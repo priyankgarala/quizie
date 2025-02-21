@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Menu, X } from "lucide-react"; // For icons
+import { Menu, X, } from "lucide-react"; // For icons
 
 export default function NavBar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -17,21 +17,24 @@ export default function NavBar() {
 
         {/* Desktop Menu */}
         <div className="hidden md:flex space-x-6">
-          <Link href="/quiz" className="hover:text-gray-400">
+          <Link href="/quizes" className="hover:text-gray-400">
             Quizzes
           </Link>
-          <Link href="/leaderboard" className="hover:text-gray-400">
+          <Link href="" className="hover:text-gray-400">
             Leaderboard
           </Link>
-          <Link href="/about" className="hover:text-gray-400">
+          <Link href="" className="hover:text-gray-400">
             About
           </Link>
         </div>
 
+        <div className="md:flex md:flex-row items-center gap-4 justify-between hidden">
         {/* Start Quiz Button */}
-        <Link href="/quiz" className="hidden md:block bg-blue-500 px-4 py-2 rounded-lg hover:bg-blue-600">
+        <Link href="" className="hidden md:block bg-blue-500 px-4 py-2 rounded-lg hover:bg-blue-600">
           Start Quiz
         </Link>
+
+        <Link href='/profile' className="text-white">User</Link></div>
 
         {/* Mobile Menu Button */}
         <button onClick={() => setIsOpen(!isOpen)} className="md:hidden">
@@ -42,6 +45,7 @@ export default function NavBar() {
       {/* Mobile Menu */}
       {isOpen && (
         <div className="md:hidden mt-2 bg-gray-800 p-4 space-y-2">
+
           <Link href="/quiz" className="block hover:text-gray-400">
             Quizzes
           </Link>
@@ -54,6 +58,8 @@ export default function NavBar() {
           <Link href="/quiz" className="block bg-blue-500 px-4 py-2 rounded-lg text-center hover:bg-blue-600">
             Start Quiz
           </Link>
+
+          
         </div>
       )}
     </nav>
