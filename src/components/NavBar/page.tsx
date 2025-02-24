@@ -30,7 +30,7 @@ export default function NavBar() {
 
         <div className="md:flex md:flex-row items-center gap-4 justify-between hidden">
         {/* Start Quiz Button */}
-        <Link href="" className="hidden md:block bg-blue-500 px-4 py-2 rounded-lg hover:bg-blue-600">
+        <Link href="/newquiz/quiz" className="hidden md:block bg-blue-500 px-4 py-2 rounded-lg hover:bg-blue-600">
           Start Quiz
         </Link>
 
