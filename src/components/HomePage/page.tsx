@@ -1,6 +1,6 @@
 export default function HomePage() {
     return (
-      <div className="min-h-screen text-white flex flex-col items-center justify-center md:p-0 p-6">
+      <div className="md:mt-10 h-full text-white flex flex-col items-center justify-center md:p-0 p-6">
         <div className="text-center max-w-2xl">
           <h1 className="text-4xl md:text-6xl font-bold leading-tight">
             Test Your Knowledge with Our Ultimate Quiz App

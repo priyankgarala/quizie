@@ -1,9 +1,9 @@
 "use client";
 
-import { useState } from 'react';
+import { useState } from "react";
 
 interface Question {
-    type: 'MCQ' | 'BLANK' | 'QA';
+    type: "MCQ" | "BLANK" | "QA";
     question: string;
     options?: string[];
     correctAnswer: string;
@@ -11,7 +11,7 @@ interface Question {
 
 export default function ManualQuiz() {
     const [questions, setQuestions] = useState<Question[]>([
-        { type: 'MCQ', question: '', options: ['', '', '', ''], correctAnswer: '' }
+        { type: "MCQ", question: "", options: ["", "", "", ""], correctAnswer: "" }
     ]);
 
     const handleQuestionChange = (index: number, value: string) => {
@@ -34,28 +34,36 @@ export default function ManualQuiz() {
         setQuestions(updatedQuestions);
     };
 
-    const handleTypeChange = (index: number, value: 'MCQ' | 'BLANK' | 'QA') => {
+    const handleTypeChange = (index: number, value: "MCQ" | "BLANK" | "QA") => {
         const updatedQuestions = [...questions];
         updatedQuestions[index] = {
             type: value,
-            question: '',
-            correctAnswer: '',
-            ...(value === 'MCQ' ? { options: ['', '', '', ''] } : {}),
+            question: "",
+            correctAnswer: "",
+            ...(value === "MCQ" ? { options: ["", "", "", ""] } : {}),
         };
         setQuestions(updatedQuestions);
     };
 
     const handleAddQuestion = () => {
-        setQuestions([...questions, { type: 'MCQ', question: '', options: ['', '', '', ''], correctAnswer: '' }]);
+        setQuestions([
+            ...questions,
+            { type: "MCQ", question: "", options: ["", "", "", ""], correctAnswer: "" }
+        ]);
+    };
+
+    const handleRemoveQuestion = (index: number) => {
+        const updatedQuestions = questions.filter((_, i) => i !== index);
+        setQuestions(updatedQuestions);
     };
 
     const handleSubmit = () => {
-        console.log('Submitted Quiz:', questions);
+        console.log("Submitted Quiz:", questions);
     };
 
     return (
-        <div className="min-h-screen text-white flex flex-col items-center justify-center px-6">
-            <h1 className="text-4xl md:text-5xl font-bold mb-6 text-center">
+        <div className=" text-white flex flex-col items-center justify-center px-6">
+            <h1 className="text-4xl md:text-5xl font-bold mb-6 text-center mt-4">
                 Create Your Custom Quiz
             </h1>
             <p className="text-lg text-gray-400 mb-8 text-center">
@@ -64,13 +72,13 @@ export default function ManualQuiz() {
 
             <div className="w-full max-w-4xl">
                 {questions.map((question, index) => (
-                    <div key={index} className="p-6 bg-gray-800 rounded-xl shadow-lg mb-6">
+                    <div key={index} className="p-6 bg-gray-800 rounded-xl shadow-lg mb-6 relative">
                         {/* Question Type Selector */}
                         <div className="mb-4">
                             <label className="text-lg text-gray-300">Question Type</label>
                             <select
                                 value={question.type}
-                                onChange={(e) => handleTypeChange(index, e.target.value as 'MCQ' | 'BLANK' | 'QA')}
+                                onChange={(e) => handleTypeChange(index, e.target.value as "MCQ" | "BLANK" | "QA")}
                                 className="w-full p-3 bg-gray-700 text-white rounded-md mt-2"
                             >
                                 <option value="MCQ">Multiple Choice</option>
@@ -92,7 +100,7 @@ export default function ManualQuiz() {
                         </div>
 
                         {/* MCQ Options */}
-                        {question.type === 'MCQ' && question.options && (
+                        {question.type === "MCQ" && question.options && (
                             <>
                                 {question.options.map((option, optionIndex) => (
                                     <div key={optionIndex} className="mb-4">
@@ -125,7 +133,7 @@ export default function ManualQuiz() {
                         )}
 
                         {/* Fill in the Blank Answer */}
-                        {question.type === 'BLANK' && (
+                        {question.type === "BLANK" && (
                             <div className="mb-4">
                                 <label className="text-lg text-gray-300">Correct Answer</label>
                                 <input
@@ -139,7 +147,7 @@ export default function ManualQuiz() {
                         )}
 
                         {/* Question & Answer Field */}
-                        {question.type === 'QA' && (
+                        {question.type === "QA" && (
                             <div className="mb-4">
                                 <label className="text-lg text-gray-300">Correct Answer</label>
                                 <textarea
@@ -151,6 +159,14 @@ export default function ManualQuiz() {
                                 />
                             </div>
                         )}
+
+                        {/* Remove Question Button */}
+                        <button
+                            onClick={() => handleRemoveQuestion(index)}
+                            className="absolute top-4 right-4 px-3 py-1 bg-red-500 hover:bg-red-600 text-white text-sm font-semibold rounded-md"
+                        >
+                            Remove
+                        </button>
                     </div>
                 ))}
 

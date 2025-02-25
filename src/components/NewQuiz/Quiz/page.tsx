@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export default function QuizOptions() {
     return (
-        <div className="min-h-screen text-white flex flex-col items-center justify-center px-6">
+        <div className="md:mt-32 text-white flex flex-col items-center justify-center px-6">
             <h1 className="text-4xl md:text-5xl font-bold mb-6 text-center">
                 Choose How to Create Your Quiz
             </h1>
