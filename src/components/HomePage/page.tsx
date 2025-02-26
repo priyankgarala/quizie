@@ -3,7 +3,7 @@ export default function HomePage() {
       <div className="md:mt-10 h-full text-white flex flex-col items-center justify-center md:p-0 p-6">
         <div className="text-center max-w-2xl">
           <h1 className="text-4xl md:text-6xl font-bold leading-tight">
-            Test Your Knowledge with Our Ultimate Quiz App
+            Test Your Knowledge with Our Ultimate Quiz App.
           </h1>
           <p className="mt-4 text-lg text-gray-400">
             Challenge yourself with fun and engaging quizzes on various topics. Also Generate Quizes based on your terms.
