@@ -7,7 +7,6 @@ export default function LoginPage() {
     const router = useRouter();
 
     const [formData, setFormData] = useState({
-        name: "",
         email: "",
         password: "",
     });
@@ -22,7 +21,7 @@ export default function LoginPage() {
         return /\S+@\S+\.\S+/.test(email);
     };
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
         if (!formData.email || !formData.password) {
@@ -35,16 +34,24 @@ export default function LoginPage() {
             return;
         }
 
-        if (formData.password.length < 6) {
-            setError("Password must be at least 6 characters!");
-            return;
+        try {
+            const res = await fetch("/api/auth/login", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ email: formData.email, password: formData.password }),
+            });
+
+            const data = await res.json();
+            if (!res.ok) {
+                setError(data.error);
+                return;
+            }
+
+            console.log("Login Successful:", data);
+            router.push("/home");
+        } catch (error) {
+            setError("Something went wrong. Please try again!");
         }
-
-        setError("");
-        console.log("User Signed Up:", formData);
-
-        // Redirect to login or dashboard after signup
-        router.push("/home");
     };
 
     return (
@@ -55,7 +62,6 @@ export default function LoginPage() {
                 {error && <p className="text-red-500 text-center mb-4">{error}</p>}
 
                 <form onSubmit={handleSubmit} className="space-y-4">
-
                     <div>
                         <label className="block text-gray-300">Email</label>
                         <input
@@ -87,7 +93,12 @@ export default function LoginPage() {
                         Sign In
                     </button>
                 </form>
-
+                <p className="text-gray-400 text-center mt-4">
+                    Don't have an account?{" "}
+                    <a href="/auth/signup" className="text-blue-400 hover:underline">
+                        SignUp
+                    </a>
+                </p>
             </div>
         </div>
     );

@@ -22,30 +22,46 @@ export default function SignupPage() {
         return /\S+@\S+\.\S+/.test(email);
     };
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-
+    
         if (!formData.name || !formData.email || !formData.password) {
             setError("All fields are required!");
             return;
         }
-
+    
         if (!validateEmail(formData.email)) {
             setError("Invalid email format!");
             return;
         }
-
+    
         if (formData.password.length < 6) {
             setError("Password must be at least 6 characters!");
             return;
         }
-
+    
         setError("");
-        console.log("User Signed Up:", formData);
-
-        // Redirect to login or dashboard after signup
-        router.push("/home");
+    
+        try {
+            const res = await fetch("/api/auth/signup", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(formData),
+            });
+    
+            const data = await res.json();
+            if (!res.ok) {
+                setError(data.error);
+                return;
+            }
+    
+            console.log("User Signed Up:", data);
+            router.push("/home"); // Redirect to home after signup
+        } catch (error) {
+            setError("Something went wrong. Please try again.");
+        }
     };
+    
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-gray-900 text-white px-6">
