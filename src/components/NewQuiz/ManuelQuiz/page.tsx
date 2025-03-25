@@ -299,9 +299,8 @@ export default function ManualQuiz() {
                 <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
                     <div className="bg-white p-6 rounded-lg shadow-lg text-black">
                         <p className="text-lg mb-4">Quiz Link:</p>
-                        <a href={quizLink} className="text-blue-500 underline break-all">
-                            {quizLink}
-                        </a>
+                        <a href={quizLink || ""} className="text-blue-500 underline break-all">
+                        {quizLink || "No link available"}                        </a>
                         <button
                             onClick={() => setShowPopup(false)}
                             className="mt-4 px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-lg transition"
