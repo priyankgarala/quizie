@@ -1,12 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import {  useState } from "react";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
 
 export default function NavBar() {
   const [isOpen, setIsOpen] = useState(false);
-
 
   return (
     <nav className="bg-gray-900 text-white p-4">
