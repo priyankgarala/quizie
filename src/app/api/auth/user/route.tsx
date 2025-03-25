@@ -29,9 +29,9 @@ export async function GET(req: Request) {
     console.log("User fetched from Prisma:", dbUser);
     return NextResponse.json({ user: dbUser }, { status: 200 });
   } catch (error) {
-    console.error("Error in GET /api/auth/user:", error.message || error);
+    console.error("Error in GET /api/auth/user:");
     return NextResponse.json(
-      { error: "Something went wrong", details: error.message || "Unknown error" },
+      { error: "Something went wrong"},
       { status: 500 }
     );
   }
