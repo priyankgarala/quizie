@@ -48,6 +48,7 @@ export default function LoginPage() {
             }
 
             console.log("Login Successful:", data);
+            localStorage.setItem('user', JSON.stringify(data));
             router.push("/home");
         } catch (error) {
             setError("Something went wrong. Please try again!");
@@ -95,7 +96,7 @@ export default function LoginPage() {
                 </form>
                 <p className="text-gray-400 text-center mt-4">
                     Don't have an account?{" "}
-                    <a href="/auth/signup" className="text-blue-400 hover:underline">
+                    <a href="/signup" className="text-blue-400 hover:underline">
                         SignUp
                     </a>
                 </p>
